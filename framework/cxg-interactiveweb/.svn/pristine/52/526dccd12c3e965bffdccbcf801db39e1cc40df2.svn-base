@@ -1,0 +1,30 @@
+package com.r2cf.interactiveweb.pojo;
+
+import com.r2cf.core.annotation.po.TableName;
+import com.r2cf.core.beans.Constraint;
+
+@TableName(name="q_test_table2")
+public class TestImgResourcePo extends Constraint {
+
+	private int id;
+	
+	private String url;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
+}

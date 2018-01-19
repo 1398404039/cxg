@@ -1,0 +1,9 @@
+package com.r2cf.core.util.format.type;
+
+
+import java.io.Serializable;
+
+public abstract interface Type extends Serializable
+{
+}
+

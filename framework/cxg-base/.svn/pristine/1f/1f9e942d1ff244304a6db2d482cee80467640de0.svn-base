@@ -1,0 +1,8 @@
+package com.r2cf.mapper;
+
+import com.r2cf.common.mapper.IGeneralDaoMybatis;
+import com.r2cf.entity.Country;
+
+public interface CountryMapper extends IGeneralDaoMybatis<Country> {
+
+}

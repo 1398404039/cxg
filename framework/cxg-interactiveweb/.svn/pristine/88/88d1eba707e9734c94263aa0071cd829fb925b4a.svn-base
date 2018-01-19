@@ -1,0 +1,23 @@
+package com.r2cf.interactiveweb.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.r2cf.interactiveweb.pojo.TestUserPo;
+import com.r2cf.service.IGeneralService;
+
+
+public interface TestService extends IGeneralService<TestUserPo> {
+
+	/**
+	 * 添加一些用于测试的记用户录到数据库
+	 * @return
+	 */
+	int addList();
+	
+	
+	
+	
+	List<Map>  queryuserAndImg();
+	
+}

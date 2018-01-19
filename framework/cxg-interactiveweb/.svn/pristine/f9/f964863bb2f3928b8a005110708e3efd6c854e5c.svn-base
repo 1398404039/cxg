@@ -1,0 +1,68 @@
+package com.r2cf.interactiveweb.service.impl;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.r2cf.core.beans.Method;
+import com.r2cf.core.sql.where.Constant;
+import com.r2cf.core.util.Formatter;
+import com.r2cf.core.util.FormatterSql;
+import com.r2cf.interactiveweb.dao.impl.ImgDaoImpl;
+import com.r2cf.interactiveweb.dao.impl.UserDaoImpl;
+import com.r2cf.interactiveweb.pojo.TestImgResourcePo;
+import com.r2cf.interactiveweb.pojo.TestUserPo;
+import com.r2cf.interactiveweb.service.TestService;
+import com.r2cf.service.impl.GeneralServiceImpl;
+
+@Service
+public class TestServiceImpl extends GeneralServiceImpl<TestUserPo>  implements TestService {
+	
+	@Resource
+	private ImgDaoImpl imgDao;
+	
+	@Resource
+	private UserDaoImpl userDao;
+
+	@Override
+	@Transactional(isolation = Isolation.SERIALIZABLE)
+	public int addList() {
+		
+		List<TestUserPo> users = new ArrayList<>();
+		List<TestImgResourcePo> imgs = new ArrayList<>();
+		
+		for (int i = 0; i < 3000; i++) {
+			TestImgResourcePo imgResourcePo = new TestImgResourcePo();
+			imgResourcePo.setUrl("http://imgresource.com/url/" + i + ".jpg");
+			imgs.add(imgResourcePo);
+		}
+		int add = imgDao.add(imgs);
+		
+		for (int i = 0; i < 3000; i++) {
+			TestUserPo testUserPo = new TestUserPo();
+			testUserPo.setImgId(imgs.get(i).getId());
+			testUserPo.setName("用户" + i);
+			users.add(testUserPo);
+		}
+		add += userDao.add(users);
+		
+		
+		return add;
+	}
+
+
+	
+
+	@Override
+	public List<Map> queryuserAndImg() {
+		
+		return userDao.queryuserAndImg();
+	}
+}
